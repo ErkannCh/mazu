@@ -1,0 +1,17 @@
+:root {
+	--color-background-light: #cccccc;
+	--color-background-secondary-light: #ffffff;
+	--color-background-dark: #212121;
+	--color-background-secondary-dark: #303030;
+	--color-background-third-dark: #171717;
+}
+
+:root .light {
+	--color-background: var(--color-background-light);
+	--color-background-secondary: var(--color-background-secondary-light);
+}
+
+:root .dark {
+	--color-background: var(--color-background-dark);
+	--color-background-secondary: var(--color-background-secondary-dark);
+}
