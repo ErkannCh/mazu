@@ -173,8 +173,8 @@ async function sendImageToAzure(file: File) {
 				<span class="text-[70px]">🥘 {{ suppress_underscore(prediction) }} 🥘</span>
 			</div>
 			<div v-if="predictionIsDiabetes != 'Inconnu' && !isLoading" class="flex flex-col items-center justify-center">
-				<span v-if="predictionIsDiabetes.includes('Oui')" class="text-[20px] italic">Ce plat peut être consommé par un diabétique</span>
-				<span v-else class="text-[20px] italic">Il est déconseillé à un diabétique de trop en manger</span>
+				<span v-if="predictionIsDiabetes.includes('Oui')" class="text-[20px] italic">Ce plat semble sain à consommer</span>
+				<span v-else class="text-[20px] italic">Ce plat ne semble pas sain à consommer</span>
 			</div>
 		</div>
     </div>
