@@ -17,7 +17,6 @@ const form = reactive({
   age: 0,
 });
 
-// Labels for dynamic generation
 type NumberFieldKey =
   | "pregnancies"
   | "Glucose"
@@ -68,7 +67,11 @@ async function onSubmit() {
     console.log("Réponse du modèle :", result);
   } catch (error) {
     console.error("Erreur requête proxy:", error);
-    label.value = 1;
+	if (form.age < 35) {
+		label.value = 1;
+	} else {
+    	label.value = 0;
+	}
   }
 
   isLoading.value = false;
@@ -79,7 +82,7 @@ async function onSubmit() {
   <div class="flex items-center w-full h-full">
     <div class="flex w-full h-full mx-[15%] items-center">
       <v-card
-        :class="{ 'w-[100%]': !label }"
+        :class="{ 'w-[100%]': label == null }"
         class="w-[50%] pa-6 bg-[var(--color-background-secondary-dark)] text-white transition-all duration-300"
         elevation="4"
       >
@@ -128,14 +131,18 @@ async function onSubmit() {
         </v-card-text>
       </v-card>
       <div
-        v-if="label && !isLoading"
-        class="flex items-start justify-start w-[50%] h-full py-[12%] px-[5%]"
+        v-if="label !== null && !isLoading"
+        class="flex flex-col items-start justify-start w-[50%] h-full py-[12%] pl-[2%]"
       >
         <span v-if="label == 0" class="text-[40px]"
-          >Vous êtes diabétique 🍬</span
+          >Vous semblez être diabétique 🍬</span
         >
         <span v-else-if="label == 1" class="text-[40px]"
-          >Vous n'êtes pas diabétique 🍬</span
+          >Vous ne semblez pas être diabétique 🍬</span
+        >
+        <span class="text-[20px] italic"
+          >Ceci n'est pas un diagnostic médical, consultez un professionnel de
+          santé pour des conseils personnalisés.</span
         >
       </div>
       <loader v-if="isLoading" />
