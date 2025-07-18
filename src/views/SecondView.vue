@@ -44,22 +44,30 @@ const rules = {
 
 async function onSubmit() {
   isLoading.value = true;
+  const payload = {
+    Inputs: {
+      input1: [
+        {
+          Pregnancies: form.pregnancies,
+          Glucose: form.Glucose,
+          BloodPressure: form.BloodPressure,
+          SkinThickness: form.SkinThickness,
+          Insulin: form.Insulin,
+          BMI: form.BMI,
+          DiabetesPedigreeFunction: form.DiabetesPedigreeFunction,
+          Age: form.age,
+        },
+      ],
+    },
+  };
   try {
-    const response = await fetch("http://localhost:3000/api/predict", {
+    const response = await fetch("http://a00f8d2c-a7bf-4bd3-b35d-d9505d67ccab.francecentral.azurecontainer.io/score", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": "Bearer 3SjUsBdN2Vdh0odmXBfrOe2fO9KZCY4C"
       },
-      body: JSON.stringify({
-        Pregnancies: form.pregnancies,
-        Glucose: form.Glucose,
-        BloodPressure: form.BloodPressure,
-        SkinThickness: form.SkinThickness,
-        Insulin: form.Insulin,
-        BMI: form.BMI,
-        DiabetesPedigreeFunction: form.DiabetesPedigreeFunction,
-        Age: form.age,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const result = await response.json();
